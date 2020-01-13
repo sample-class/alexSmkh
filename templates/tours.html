@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <!-- HERO -->
+
+  <h1 class="display-2 my-3" style="font-weight: bold; font-family: monospace">{{ tour.title }} {{ tour.stars }}⭐</h1>
+  <div class="row mb-4 ml-2">
+    <div class="col-2 btn btn-outline-success mr-2">{{ tour.country }}</div>
+    <div class="col-2 btn btn-outline-success">{{ tour.nights}} ночей</div>
+  </div>
+  {% if tour.picture %}
+    <img src="{{ tour.picture }}" class="w-75" alt="">
+  {% else %}
+    <img src="https://place-hold.it/300x200" class="w-75" alt="">
+  {% endif %}
+  <p class="my-4 w-75">{{ tour.description }}</p>
+  <a href="#" class="btn btn-success btn-lg">Купить тур за {{ tour.price }}</a>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+  {% block content %}
+
+  <!-- HERO -->
+  <div class="main_image jumbotron text-center mt-4">
+    <div class="main_text">
+      <h1 class="display-4">{{ title }}</h1>
+      <p class="lead">{{ subtitle }}</p>
+      <p class="mt-5 w-50 mx-auto">{{ description }}</p>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+
+  <div class="row mt-5">
+    {% for tour in tours %}
+    <div class="col-4">
+      <div class="card mb-3">
+        {% if tour.picture %}
+        <img src="{{ tour.picture }}" class="card-img-top img-fluid">
+        {% else %}
+        <img src="https://place-hold.it/300x200" class="card-img-top img-fluid">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title"><span style="font-weight: bold">{{ tour.country }}:  {{ tour.title }}</span></h5>
+          <p class="card-text">{{ tour.description }}</p>
+          <div class="row">
+            <div><span class="ml-3" style="font-weight: bold">{{ tour.date}}, {{ tour.nights}} ночей, {{ tour.price}} руб</span></div>
+            <div style="flex: 1; text-align: right"><span class ="pr-3" style="font-weight: bold">{{ tour.stars }} ⭐</span></div>
+          </div>
+          <a href="/tours/{{ tour.id }}" class="btn btn-sm btn-primary mt-3">Подробнее</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}
+

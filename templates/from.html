@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="display-5 mt-4">Летим из <span style="font-weight: bold">{{ departure }}</span></h1>
+{% if tours_info.number_of_tours == 1 %}
+  <p class="mb-4"><span style="font-weight: bold">Найден {{ tours_info.number_of_tours }} тур,</span> {{
+    tour_info.max_price }}р на {{ tour_info.max_number_of_nights }} ночей.</p>
+{% elif 2 <= tours_info.number_of_tours <= 4 %}
+<p><span style="font-weight: bold">Найдено {{ tours_info.number_of_tours }} тура,</span> от {{ tours_info.min_price}} до
+    {{ tours_info.max_price}} и от {{ tours_info.min_number_of_nights }} ночей до {{ tours_info.max_number_of_nights }} ночей</p>
+{% elif tour_info %}
+<p class="mb-4"><span style="font-weight: bold">Найдено {{ tours_info.number_of_tours }} туров,</span> от {{ tours_info.min_price}} до
+    {{ tours_info.max_price}} и от {{ tours_info.min_number_of_nights }} ночей до {{ tours_info.max_number_of_nights }} ночей</p>
+{% else %}
+  <p>Подходящие туры не найдены.</p>
+{% endif %}
+
+    <!-- CARDS -->
+
+  <div class="row mt-5">
+    {% for tour in tours_for_departure %}
+      <div class="col-4">
+        <div class="card mb-3">
+          {% if tour.picture %}
+          <img src="{{ tour.picture }}"
+               class="card-img-top img-fluid">
+          {% else %}
+            <img src="https://place-hold.it/300x200"
+               class="card-img-top img-fluid">
+          {% endif %}
+        <div class="card-body">
+          <h5 class="card-title"><span style="font-weight: bold">{{ tour.country }}:  {{ tour.title }}</span></h5>
+          <p class="card-text">{{ tour.description }}</p>
+          <div class="row">
+            <div><span class="ml-3" style="font-weight: bold">{{ tour.date}}, {{ tour.nights}} ночей, {{ tour.price}} руб</span></div>
+            <div style="flex: 1; text-align: right"><span class ="pr-3" style="font-weight: bold">{{ tour.stars }} ⭐</span></div>
+          </div>
+          <a href="/tours/{{ tour.id }}" class="btn btn-sm btn-primary mt-3">Подробнее</a>
+        </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}
